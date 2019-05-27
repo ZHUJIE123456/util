@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #search_inp{
+      height: 30px;
+      width: 360px;
+      font-size: 15px;
+      padding: 0 5px;
+      outline: none;
+    }
+    .search_but{
+      height: 34px;
+      padding: 0 25px;
+      background: #1890ff;
+      border: 0;
+      color: #fff;
+      outline: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: .3s;
+      margin-bottom: 10px;
+    }
+    #search_text{
+      width: 100%;
+      height: 200px;
+      border-bottom: 1px solid #1890ff;
+      margin-bottom: 15px;
+      
+    }
+
+  </style>
+</head>
+<body>
+  <div id='search'>
+    <input type="text" name="search_inp" id="search_inp">
+    <button id='search_but' class="search_but">搜索</button>
+    <button id='search_cz' class="search_but">重置</button>
+    <div id='search_text'></div>
+  </div>
+  <div id='text'>
+    作为商户，您的收银台桌面是否摆满了各家银行的POS机，贴满了各种移动渠道的二维码？目前，中信银行(601998,股吧)推出了“全付通”创新结算产品，成为市场上商户收款利器。“全付通”是中信银行推出的一款创新支付结算类产品，有效整合微信支付、支付宝支付、银联云闪付等知名支付结算渠道，客户通过我行全付通产品即可实现线上、线下不同的应用场景收款。
+    特色一：支持全渠道收款
+    全付通是中信银行互联网收单品牌，聚合了微信支付、支付宝支付、 Pay等各种支付方式，具有收款退款、交易流水查询、财务统计报表、订单核销与卡券管理等多种服务，轻松满足商户线上、线下各种支付管理需求。
+    1.线下支付场景包括：微信、支付宝、银联云闪付等二维码的主扫与被扫收款，我行可为线下商户提供智能POS机具，该机具支持刷卡、微信、支付宝、Pay等多种支付方式，实现手机支付与银联刷卡等传统支付方式的完美结合。
+    同时我行全付通可支持嵌入ERP一体化收银平台，为商户提供资金流、信息流、订单流三流合一的智能化收银平台。
+    2.线上支付场景包括：微信公textT众号及小程序支付、微信WAP支付、微信APP支付、支付宝服务窗支付、QQ钱包支付等收款功能。
+    以微信公众号支付为例：商户将我行全付通支付通道接入其公众号内，用户关注商户微信公众号，并通过公众号选择需要购买的商品发起支付时，调用全付通支付通道实现付款操作。
+  </div>
+</body>
+<script>
+  var oSearch_but = document.getElementById('search_but')
+  var oSearch_inp = document.getElementById('search_inp')
+  var oSearch_text = document.getElementById('search_text')
+  var oSearch_cz = document.getElementById('search_cz')
+  var oText = document.getElementById('text')
+
+  oSearch_but.onclick = () => {
+    var text = oSearch_inp.value
+    if(text === ''){
+      alert('搜索框不能为空！')
+    }else {
+      if(oText.innerText.indexOf(text) != -1){
+        oSearch_text.innerText = oText.innerText.substr(oText.innerText.indexOf(text), text.length)
+      }else {
+        alert('未搜索到该字段！')
+      }
+    }
+  }
+
+
+
+
+
+  oSearch_cz.onclick = () => {
+    oSearch_inp.value = ''
+    oSearch_text.innerText = ''
+  }
+
+  oSearch_but.onmousemove = () => {
+    oSearch_but.style.background = '#40a9ff'
+  }
+  
+  oSearch_but.onmouseout = () => {
+    oSearch_but.style.background = '#1890ff'
+  }
+
+  oSearch_but.onmousedown = () => {
+    oSearch_but.style.background = '#096dd9'
+  }
+
+  oSearch_but.onmouseup = () => {
+    oSearch_but.style.background = '#1890ff'
+  }
+</script>
+</html>

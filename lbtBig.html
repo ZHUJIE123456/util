@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    html, body{
+      width: 100%;
+      height: 100%;
+    }
+    /* #div{
+      width: 100%;
+      height: 100%;
+    }
+    .ifr{
+      width:100%;
+      height: 100%;
+    } */
+    .top{
+      height: 150px;
+      width: 100px;
+      background: #eeeeee;
+      position: absolute;
+      top: 200px;
+      left: 200px;
+      border-radius: 50px;
+      box-shadow: 5px 8px 10px #d4d3d3;
+    }
+    #box{
+      width: 300px;
+      height: 200px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-top: -100px;
+      margin-left: -150px;
+    }
+    img{
+      width: 300px;
+      height: 200px;
+      cursor: pointer;
+      transition: .5s;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      transition: .5s;
+    }
+    .box{
+      width: 10px;
+      height: 10px;
+      float: left;
+      margin-right: 10px;
+      background: #fff;
+      z-index: 9999;
+    }
+    .active{
+      opacity: 1;
+      z-index: 99999;
+    }
+
+    .left, .right{
+      width: 50px;
+      height: 50px;
+      line-height: 40px;
+      text-align: center;
+      font-size: 75px;
+      margin: 0;
+      position: absolute;
+      top: 75px;
+      cursor: pointer;
+      display: none;
+      transition: .5s;
+    }
+    .left{
+      left: -55px;
+    }
+    .right{
+      right: -50px;
+    }
+    #bottom_div{
+      width: 100%;
+      position: absolute;
+      bottom: 7px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+    .bottom_ul{
+      margin: 0;
+      padding: 0;
+      z-index: 999991;
+    }
+    .bottom_li{
+      width: 15px;
+      height: 15px;
+      font-size: 12px;
+      line-height: 15px;
+      color: #fff;
+      text-align: center;
+      margin-right: 10px;
+      border-radius: 50%;
+      opacity: .6;
+      cursor: pointer;
+      background: #5f240f;
+      list-style: none;
+      float: left;
+    }
+    .active_li{
+      opacity: .6;
+      background: #fff;
+      color: #5f240f;
+    }
+    
+
+    #time{
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div id='div'>
+    <!-- <iframe src="http://www.baidu.com" frameborder="0" class="ifr"></iframe> -->
+  </div>
+  <div class="top"></div>
+  <div id='box'>
+    <p class="left"><</p>
+    <p class="right">></p>
+    <div id="bottom_div"></div>
+  </div>
+  <div id='time'></div>
+</body>
+<script>
+  var imgarr = ['img/img/1.jpg', 'img/img/2.jpg', 'img/img/3.jpg', 'img/img/4.jpg', 'img/img/5.jpg', 'img/img/6.jpg']
+
+  var oBox = document.getElementById('box')
+  var oBottom_div = document.getElementById('bottom_div')
+  var oTime = document.getElementById('time')
+
+  var e = document.getElementsByClassName('imgbig')
+  var oLeft = document.getElementsByClassName('left')[0]
+  var oRight = document.getElementsByClassName('right')[0]
+
+  var num = 1, number = 0
+  var time = null
+
+  // 当前系统时间
+  function times(){
+    setInterval(() => {
+      let date = new Date()
+      oTime.innerText = `北京时间　${addNum(date.getHours())}:${addNum(date.getMinutes())}:${addNum(date.getSeconds())}`
+    }, 1000)
+  }
+  times()
+
+  // 小于数字10时默认加一个0
+  function addNum(num){
+    let aNum = num
+    if(aNum < 10){
+      aNum = `0${num}`
+    }
+    return aNum
+  }
+  
+
+  // 根据图片数组的长度，动态添加img元素
+  function createImg(){
+    imgarr.map((item, i) => {
+      var imgs = document.createElement('img')
+      if(i === 0){
+        imgs.setAttribute('class', 'imgbig active')
+      }else {
+        imgs.setAttribute('class', 'imgbig')
+      }
+      imgs.src = `${item}`
+      oBox.appendChild(imgs)
+    })
+  }
+  createImg()
+
+  // 根据图片数组的长度，动态添加li元素
+  function createUl_li(){
+    var oUl = document.createElement('ul')
+    oUl.setAttribute('class', 'bottom_ul')
+    var oLi = null
+    var num = null
+    imgarr.map((item, i) => {
+      oLi = document.createElement('li')
+      num = document.createTextNode(i + 1)
+      oLi.appendChild(num)
+      if(i === 0){
+        oLi.setAttribute('class', 'bottom_li active_li')
+      }else {
+        oLi.setAttribute('class', 'bottom_li')
+      }
+      oUl.appendChild(oLi)
+    })
+    oBottom_div.appendChild(oUl)
+
+    liMouse()
+  }
+  createUl_li()
+
+  // 移入切换事件
+  function liMouse(){
+    var oBottom_li = document.getElementsByClassName('bottom_li')
+    for(var i = 0; i < oBottom_li.length; i++){
+      oBottom_li[i].index = i - 1
+      oBottom_li[i].onmouseover = function(){
+        number = this.index
+        cal()
+      }
+    }
+  }
+
+
+  // 左右按钮点击事件
+  oLeft.onclick = () => {
+    this.cal('l')
+  }
+
+  oRight.onclick = () => {
+    this.cal('r')
+  }
+
+  // 声明一个定时器，用来显示轮播图效果
+  time = setInterval(this.cal, 2000)
+
+  // 图片切换代码
+  function cal(str){
+    if(str === 'l'){
+      number -= 1
+      if(number < 0){
+        number = document.getElementsByClassName('imgbig').length - 1
+      }
+    }else{
+      number += 1
+      if(number >= document.getElementsByClassName('imgbig').length){
+        number = 0
+      }
+    }
+    
+    for(var i = 0; i < document.getElementsByClassName('imgbig').length; i++){
+      document.getElementsByClassName('imgbig')[i].className = 'imgbig'
+      document.getElementsByClassName('bottom_li')[i].className = 'bottom_li'
+    }
+    document.getElementsByClassName('imgbig')[number].className = 'imgbig active'
+    document.getElementsByClassName('bottom_li')[number].className = 'bottom_li active_li'
+  }
+
+  oBox.onmouseover = () => {
+    oLeft.style.display = 'block'
+    oRight.style.display = 'block'
+    clearInterval(time) // 鼠标移入时清除定时器功能
+
+    // 给每一个img添加鼠标滚轮事件
+    for(var i = 0; i < e.length; i++){
+      e[i].addEventListener('mousewheel', big, false)
+    }
+  }
+
+  oBox.onmouseout = () => {
+    oLeft.style.display = 'none'
+    oRight.style.display = 'none'
+    time = setInterval(this.cal, 2000) // 鼠标移出继续执行图片切换功能
+  }
+
+
+  
+  // 图片放大
+  function big(){
+    if(event.wheelDelta > 0){
+      if(num >= 3){
+        alert('图片不能再放大了！')
+        return false;
+      }
+      num += 0.5
+    }else {
+      if(num <= 1){
+        alert('图片不能再缩小了！')
+        return false;
+      }
+      num -= 0.5
+    }
+    this.style.transform = `scale(${num})`
+  }
+</script>
+</html>

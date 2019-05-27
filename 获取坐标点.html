@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #cardId{
+        width: 150px;
+        height: 35px;
+        border: 0;
+        border-radius: 2px;
+        color: #fff;
+        outline: none;
+        cursor: pointer;
+        background: #5a8def;
+    }
+    #box{
+        width: 102px;
+        height: 102px;
+        border: 1px solid #000;
+        border-radius: 50%;
+    }
+    #box > img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="getLocation()">试一下</button>
+  <button onclick="jump()">open</button>
+  <button onclick="jump1()">location</button>
+
+  <div>
+    <input type="file" id='img' />
+    <button id='cardId'>提　交</button>
+  </div>
+
+  <div id="box">
+      <img src="./detail/t5.jpg" alt="">
+  </div>
+</body>
+<script>
+
+    var oCardId = document.getElementById('cardId')
+    var oImg = document.getElementById('img')
+
+    oCardId.onclick = () => {
+
+        if(!oImg.files[0]){
+            alert('请选择要识别的身份证照片！')
+            return
+        }
+
+        // 将身份证的图片格式变为base64位的图片格式
+        var fileReader = new FileReader()
+        fileReader.readAsDataURL(oImg.files[0])
+        fileReader.onload = function(){
+
+            // 发起ajax请求
+            xmlHttp = new XMLHttpRequest()
+            xmlHttp.open('post', 'https://api.youtu.qq.com/youtu/ocrapi/idcardocr', true)
+            xmlHttp.setRequestHeader("Host", "api.youtu.qq.com")
+            xmlHttp.send({
+                "app_id":  10160001,
+                "image": this.result,
+                // "session_id": '5ziw53tbAZr35GH7B6sZ6SegXGl9Ohz9',
+                "card_type": 2,
+                "border_check_flag": true,
+                "enable_reshoot": true,
+                "enable_detect_copy": true,
+                "ret_image": false,
+                "enable_recognize_warn_code": true,
+                "enable_quality_value": true,
+                "ret_portrait_flag": false
+            })
+
+            xmlHttp.onreadystatechange = function(){
+                if(xmlHttp.readyState == 4 && xmlHttp.status == 200){
+                    alert(xmlHttp.responseText)
+                }
+            }
+        }
+
+    }
+
+
+
+
+
+
+
+
+  function getLocation(){
+        if (navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }else{
+            console.log("Geolocation is not supported by this browser.");
+        }
+    }
+    function showPosition(position){
+        console.log("Latitude: " + position.coords.latitude + "<br />Longitude: " + position.coords.longitude);
+        window.location.href="http://api.map.baidu.com/direction?origin=latlng:"+position.coords.latitude+","+position.coords.longitude+"|name:我家&destination=在水一方&mode=driving&region=颍上&output=html&src=yourCompanyName|yourAppName";
+    }
+
+    function jump(){
+        window.open('http://www.baidu.com')
+    }
+    function jump1(){
+        window.location.href = 'http://www.baidu.com'
+    }
+</script>
+</html>

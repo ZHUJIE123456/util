@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>乱七八糟.com</title>
+  <style>
+    img{
+      width: 300px;
+      height: 100px;
+      cursor: pointer;
+      transition: .5s;
+    }
+    #box{
+      position: absolute;
+      top: 200px;
+      left: 40%;
+    }
+    .box1{
+      width: 400px;
+      height: 40px;
+      background: #f1f3f4;
+      border-radius: 30px;
+      transition: .2s;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .box1:hover{
+      background: #dadce0;
+      box-shadow: 3px 2px 10px #b4b4b5;
+    }
+
+    .box1_1{
+      width: 24px;
+      height: 24px;
+      margin: 0 8px;
+      float: left;
+    }
+    .box1_1 img{
+      width: 100%;
+      height: 100%;
+    }
+    .box1_2{
+      color: #202124;
+      margin: 0 6px 0 8px;
+      float: left;
+      font-size: 14px;
+    }
+
+    #div{
+      width: 104px;
+      height: 88px;
+      transition: .5s;
+      position: absolute;
+      padding: 16px 4px 10px 4px;
+      left: 500px;
+      top: 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .div_X{
+      font-size: 13px;
+      position: absolute;
+      right: 3px;
+      top: 0;
+      opacity: 0;
+      transition: .3s;
+    }
+    .div1{
+      width: 100%;
+      height: 48px;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .div_p{
+      width: 48px;
+      height: 100%;
+      margin: 0;
+      background: #dadce0;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 48px;
+    }
+    .div2{
+      color: rgba(33, 32, 36, 0.86);
+      font-size: 12px;
+      overflow: hidden;
+      padding-left: 5px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    #goback{
+      position: absolute;
+      bottom: 20px;
+      left: 45%;
+      font-size: 12px;
+      display: none;
+      transition: .3s;
+    }
+    .goback_span1{
+      font-weight: bold;
+      margin-right: 8px;
+    }
+    .goback_span2{
+      color: #1890ff;
+      text-decoration: underline;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    .goback_span3{
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <img src="./fwzn.jpg" onmousewheel='bigimg()' title='滑动滚轮可缩放' id='img'></img>
+  <div id='box'>
+    <div class="box1">
+      <div class="box1_1"><img src="./biaoqian.svg" alt=""></div>
+      <div class="box1_2">购物</div>
+    </div>
+    <div class="box1">
+      <div class="box1_1"><img src="./biaoqian.svg" alt=""></div>
+      <div class="box1_2">购物</div>
+    </div>
+    <div class="box1">
+      <div class="box1_1"><img src="./biaoqian.svg" alt=""></div>
+      <div class="box1_2">购物</div>
+    </div>
+    <div class="box1">
+      <div class="box1_1"><img src="./biaoqian.svg" alt=""></div>
+      <div class="box1_2">购物</div>
+    </div>
+  </div>
+  <div id='div'>
+    <div class="div_X">X</div>
+    <div class="div1"><p class="div_p">IP</p></div>
+    <div class="div2">颍上基础信息管控平台</div>
+  </div>
+  <div id='goback'>
+    <span class="goback_span1">已移除快捷方式</span>
+    <span class="goback_span2" onclick='goback()'>撤销</span>
+    <span class="goback_span3" onclick='clearall()'>X</span>
+  </div>
+</body>
+<script>
+  var oImg = document.getElementById('img')
+  var num = 1
+  function bigimg(){
+    if(event.wheelDelta > 0){
+      if(num >= 3){
+        alert('图片不能在放大了！')
+        return false;
+      }
+      num += 0.5
+    }else {
+      if(num <= 1){
+        alert('图片不能在缩小了！')
+        return false;
+      }
+      num -= 0.5
+    }
+    oImg.style.transform = `scale(${num})`
+    
+    // var zoom = parseInt(obj.style.zoom,10)||100;
+    // zoom += event.wheelDelta / 12;
+    // if(zoom > 100 ){
+    //   obj.style.zoom=zoom+'%';
+    // }else {
+    //   alert('图片不能在缩小了！')
+    //   return false
+    // }
+        
+}
+
+  var oDiv = document.getElementById('div')
+  var oDiv_X = document.getElementsByClassName('div_X')[0]
+  var oGoback = document.getElementById('goback')
+  var time = null
+  // 鼠标移入时显示关闭按钮以及改变元素背景色
+  oDiv.onmouseover = function(){
+    oDiv.style.background = '#f1f3f4'
+    oDiv.style.boxShadow = '3px 2px 10px #b4b4b5'
+    oDiv_X.style.opacity = '0.8'
+    // time = setInterval(() => {
+    //   oDiv_X.style.opacity = '0.8'
+    // }, 500)
+
+    // 快捷方式删除事件
+    oDiv_X.onclick = function(){
+      if(confirm('确定要删除吗？')){
+        oDiv.style.display = 'none'
+        oGoback.style.display = 'block'
+      }else {
+        return
+      }
+    }
+  }
+
+  // 鼠标移出时关闭按钮消失，背景颜色改变
+  oDiv.onmouseout = function(){
+    oDiv_X.style.opacity = '0'
+    oDiv.style.background = '#ffffff'
+    oDiv.style.boxShadow = ''
+    // clearInterval(time)
+  }
+
+  // 底部撤销事件
+  goback = () => {
+    oDiv.style.display = 'block'
+    oGoback.style.display = 'none'
+  }
+
+  // 底部关闭提示事件
+  clearall = () => {
+    oGoback.style.display = 'none'
+  }
+
+  // 鼠标事件
+  // mousedown: 鼠标按钮被按下（左键或者右键）时触发。不能通过键盘触发。
+  // mouseup: 鼠标按钮被释放弹起时触发。不能通过键盘触发。
+  // click: 单击鼠标左键或者按下回车键时触发。这点对确保易访问性很重要，意味着onclick事件处理程序既可以通过键盘也可以通过鼠标执行。
+  // dblclick: 双击鼠标左键时触发。
+  // mouseover: 鼠标移入目标元素上方。鼠标移到其后代元素上时会触发。
+  // mouseout: 鼠标移出目标元素上方。
+  // mouseenter: 鼠标移入元素范围内触发，该事件不冒泡，即鼠标移到其后代元素上时不会触发。
+  // mouseleave: 鼠标移出元素范围时触发，该事件不冒泡，即鼠标移到其后代元素时不会触发。
+  // mousemove: 鼠标在元素内部移到时不断触发。不能通过键盘触发。
+</script>
+</html>

@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    html, body{
+      width: 100%;
+      height: 100%;
+    }
+    #body_div{
+      width:100%;
+      height: 100%;
+    }
+    #container div{
+      height: 400px;
+      width: 200px;
+      border: 1px solid #000;
+      float: left;
+      transition: .5s;
+    }
+    #container div:hover {
+      width: 300px;
+      background: red;
+    }
+    .zz{
+      width: 100%;
+      height: 100%;
+      background: #000;
+      opacity: 0.65;
+      z-index: 99999;
+      display: none;
+      position: absolute;
+    }
+    #model{
+      width: 300px;
+      height: 260px;
+      background: #fff;
+      border: 1px solid #000;
+      display: none;
+      z-index: 999999;
+      border-radius: 5px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -130px;
+      margin-left: -150px;
+    }
+    .close{
+      height: 50px;
+      width: 100%;
+      border-bottom: 1px solid #000;
+    }
+    .close_X{
+      height: 100%;
+      width: 50px;
+      line-height: 50px;
+      text-align: center;
+      float: right;
+      cursor: pointer;
+    }
+    #bottom{
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+    }
+    span{
+      transition: 1.5s;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body id='body'>
+  <div id="body_div">
+    <div id='container'>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div>
+      <div class='zz'></div>
+      <div id='model'>
+        <div class='close'>
+          <div class='close_X'>X</div>
+        </div>
+      </div>
+      <button id='buttom'>点我</button>
+    </div>
+    <div id='bottom'>X坐标为：0；Y坐标为：0</div>
+  </div>
+</body>
+<script>
+  window.onload = function (){
+    var oBody = document.getElementById('body_div')
+    var oButtom = document.getElementById('buttom')
+    var oModel = document.getElementById('model')
+    var oBottom = document.getElementById('bottom')
+    var oZz = document.getElementsByClassName('zz')[0]
+    var oClose_X = document.getElementsByClassName('close_X')[0]
+    var stop = true
+    var id = 0
+    var textArr = ['嘿嘿','点我','JavaScript','HTML','css','less','VSCode','WeGame','WeChat','React',]
+    var colorArr = ['#000','#4169E1','#FF0000','#FF4500','#FFA500','#FFFF00','#7FFF00','#00FF7F','#008B8B','#483D8B',]
+    oButtom.onclick = function(){
+      if(stop){
+        oZz.style.display = 'block'
+        oModel.style.display = 'block'
+        stop = false
+      }
+    }
+
+    oClose_X.onclick = function(){
+      oZz.style.display = 'none'
+      oModel.style.display = 'none'
+      stop = true
+    }
+
+    
+    oBody.onclick = function(event){
+      id += 1
+      var e = event || window.event
+      var span = document.createElement('span')
+      oBottom.innerHTML = `X坐标为：${e.clientX}；Y坐标为：${e.clientY}`
+      span.id = `span${id}`
+      span.innerHTML = textArr[Random(textArr.length)]
+      span.style.position = 'absolute'
+      span.style.top = `${e.clientY}px`
+      span.style.left = `${e.clientX}px`
+      span.style.color = colorArr[Random(colorArr.length)]
+      oBody.appendChild(span)
+      var timeId = setInterval(function(){
+        span.style.top = `${e.clientY - 150}px`
+        span.style.opacity = '0'
+      },10)
+      if(id >= 2){
+        oBody.removeChild(document.getElementById(`span${id - 1}`))
+      }
+    }
+
+    function Random(length){
+      return Math.ceil(Math.random() * length - 1)
+    }
+  }
+
+</script>
+</html>
