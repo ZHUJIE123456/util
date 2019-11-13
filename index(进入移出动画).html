@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    html, body{
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    #box{
+      height: 100%;
+      width: 300px;
+      background: #4a5064;
+      position: absolute;
+      top: 0;
+      right: -300px;
+      /* box-shadow: 2px 2px 30px #000; */
+      display: flex;
+      flex-direction: column;
+    }
+    @keyframes moveRight{
+      0% {
+        right: -300px;
+        box-shadow: 2px 2px 30px #fff;
+        background: #fff;
+      }
+      100% {
+        right: 0;
+        box-shadow: 2px 2px 30px #000;
+        background: #4a5064;
+      }
+    }
+    @keyframes moveLeft{
+      0% {
+        right: 0;
+        box-shadow: 2px 2px 30px #000;
+        background: #4a5064;
+      }
+      100% {
+        right: -300px;
+        box-shadow: 2px 2px 30px #fff;
+        background: #fff;
+      }
+    }
+    .element-enter {
+      animation-name: moveRight;
+      animation-duration: 0.3s;
+      animation-play-state: running;
+      animation-fill-mode: forwards;
+    }
+    .element-leave {
+      animation-name: moveLeft;
+      animation-duration: 0.3s;
+      animation-play-state: running;
+      animation-fill-mode: forwards;
+    }
+    #box_header{
+      height: 30px;
+      border-bottom: 1px solid #fff;
+      line-height: 30px;
+      padding: 5px;
+    }
+    #box_body{
+      flex: 1;
+      padding: 5px;
+    }
+    #box_bottom{
+      height: 40px;
+      border-top: 1px solid #fff;
+      padding: 5px;
+    }
+    #query{
+      border: 0;
+      background: #1890ff;
+      color: #fff;
+      padding: 3px 15px;
+      border-radius: 5px;
+      float: right;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <button id="btn">展开</button>
+  <div id="box" class="">
+    <div id="box_header">
+      <button id="query">查询</button>
+    </div>
+    <div id="box_body"></div>
+    <div id="box_bottom"></div>
+  </div>
+</body>
+  <script>
+    var _stop = true
+    var oBtn = document.getElementById("btn")
+    var oBox = document.getElementById("box")
+    var oQuery = document.getElementById("query")
+    // oBtn.onclick = query
+    oBtn.onclick = move
+    oQuery.onclick = query
+
+    function move () {
+      var text = ""
+      if (_stop) {
+        oBox.setAttribute('class', 'element-enter')
+        text = "收起"
+        document.onkeydown = keydown
+        _stop = false
+      } else {
+        oBox.setAttribute('class', 'element-leave')
+        text = "展开"
+        document.onkeydown = ""
+        _stop = true
+      }
+      oBtn.innerText= text
+    }
+    
+    function keydown (ev) {
+      var e = ev || window.event
+      if (e.keyCode === 13) {
+        query()
+      }
+    }
+    
+
+    function query() {
+      console.log("查询成功！")
+    }
+  </script>
+</html>
