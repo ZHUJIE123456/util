@@ -1,0 +1,163 @@
+html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    button {
+      width: 100px;
+      height: 35px;
+      color: #fff;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    #body {
+      transition: .5s;
+    }
+
+    #body_box {
+      padding: 20px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #inp {
+      width: 280px;
+      height: 31px;
+      border: 1px solid #ebedf0;
+      padding: 0 10px;
+    }
+
+    #select_button {
+      background: #1890ff;
+      border: 1px solid #1890ff;
+    }
+
+    #reset {
+      background: #ff4d4f;
+      border: 1px solid #ff4d4f;
+      outline: none;
+    }
+
+    #box {
+      margin-top: 30px;
+      overflow: hidden;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .box_title {
+      height: 280px;
+      color: #fff;
+      cursor: pointer;
+      float: left;
+      margin: 0 2% 15px 0;
+      text-align: center;
+      padding: 10px;
+    }
+    
+    @media screen and (max-width: 1439px) {
+        .box_title{
+            width: 15%;
+        }
+    }
+    @media screen and (min-width: 1440px) and (max-width: 1970px) {
+        .box_title{
+            width: 10%;
+        }
+    }
+
+    .box_title>p {
+      margin-bottom: 10px;
+    }
+
+    .box_tq_date6 {
+      padding: 0 15px;
+      border-radius: 5px;
+    }
+
+    .box_tq_date7 {
+      width: 100%;
+      margin-top: 10px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .level_1 {
+      /*优*/
+      background: #40c057;
+    }
+
+    .level_2 {
+      /*良*/
+      background: #82c91e;
+    }
+
+    .level_3 {
+      /*轻度*/
+      background: #f76707;
+    }
+
+    .level_4 {
+      /*中度*/
+      background: #da555d;
+    }
+
+    .level_5 {
+      /*重度*/
+      background: #b9377a;
+    }
+
+    .level_6 {
+      /*严重*/
+      background: #881326;
+    }
+
+    .qing {
+      background: -webkit-gradient(linear, 0% 0, 0% 80%, from(#50b2fb), to(#c3e3fb));
+      transition: .5s;
+    }
+
+    .yu {
+      background: -webkit-gradient(linear, 0% 0, 0% 80%, from(#88a9ca), to(#bcd3e3));
+      transition: .5s;
+    }
+
+    #shade {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: none;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.65);
+    }
+
+    .shade_loading {
+      width: 70px;
+      height: 70px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-top: -35px;
+      margin-left: -35px;
+    }
+
+    .shade_loading>img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    #select{
+        width: 150px;
+        height: 35px;
+        line-height: 35px;
+    }
