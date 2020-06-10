@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>截屏</title>
+    <style>
+        #box {
+            height: 500px;
+            width: 100%;
+            background: red;
+            color: #fff;
+        }
+
+        #img {
+            width: 100%;
+            height: 500px;
+        }
+
+        #img img {
+            max-height: 100%;
+            max-width: 100%;
+        }
+    </style>
+    <script type="text/javascript" src="./jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="http://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+</head>
+
+<body>
+    <div id='box'>测试截屏 </div>
+    <button id='button'>生成</button>
+    <div id="img"></div>
+</body>
+<script type="text/javascript">
+    $('#button').on("click", function (event) {
+        event.preventDefault()
+        html2canvas(document.body).then(function (canvas) {
+            var dataUrl = canvas.toDataURL()
+            var newImg = document.createElement("img")
+            newImg.src = dataUrl
+            $('#img').append(newImg)
+        })
+    })  
+</script>
+
+</html>
