@@ -29,14 +29,19 @@
 </head>
 
 <body>
-    <div id='box'>测试截屏 </div>
+    <div id='box'>
+        测试截屏
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+            <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="blue" />
+        </svg>
+    </div>
     <button id='button'>生成</button>
     <div id="img"></div>
 </body>
 <script type="text/javascript">
     $('#button').on("click", function (event) {
         event.preventDefault()
-        html2canvas(document.body).then(function (canvas) {
+        html2canvas(document.getElementById('box')).then(function (canvas) {
             var dataUrl = canvas.toDataURL()
             var newImg = document.createElement("img")
             newImg.src = dataUrl

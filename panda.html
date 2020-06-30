@@ -20,6 +20,30 @@
         #box>img:nth-of-type(2) {
             top: 415px;
         }
+
+        #mark {
+            width: 80px;
+            height: 150px;
+            position: absolute;
+            right: 200px;
+            top: 100px;
+            background: #314157;
+        }
+
+        #mark:after {
+            width: 0;
+            height: 0;
+            content: "";
+            display: block;
+            position: absolute;
+            top: 14px;
+            left: 80px;
+            border-width: 5px 0 5px 5px;
+            border-style: solid;
+            border-color: transparent transparent transparent #314157;
+            /*改变方向 */
+            transform: rotate(0deg)
+        }
     </style>
 </head>
 
@@ -28,6 +52,19 @@
         <img src="./image/panda-waving-2x.png" alt="panda" srcset="">
         <img src="./image/grass-2x.png" alt="lea" srcset="">
     </div>
+    <div id='mark'>
+
+    </div>
 </body>
+<script>
+    window.onload = () => {
+        let x = ''
+        for (i = 0; i < 10; i++) {
+            if (i == 3) continue
+            x = x + "The number is " + i + "<br>"
+        }
+        console.log(x)
+    }
+</script>
 
 </html>

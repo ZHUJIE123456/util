@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		html,
+		body,
+		#tree {
+			height: 100%;
+			width: 100%;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="tree"></div>
+</body>
+<script>
+	window.onload = () => {
+		let nameArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+		let dataArr = []
+		// 随机name生成
+		let randoms = (count) => {
+			let str = ''
+			for (let i = 0; i < count; i++) {
+				let num = Math.round(Math.random() * 26)
+				str += nameArr.slice(num, num + 1)
+			}
+			return str
+		}
+
+		// 随机生成数据
+		let genData = (num) => {
+			for (let i = 0; i < num; i++) {
+				let obj = {
+					id: i,
+					name: randoms(5),
+					parent: i === 0 ? null : Math.round(Math.random() * num / 2)
+				}
+				dataArr.push(obj)
+			}
+		}
+		genData(20)
+
+		console.log(dataArr)
+	}
+</script>
+
+</html>
