@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>wangEditor demo</title>
+</head>
+
+<body>
+    <div id="editor">
+
+    </div>
+    <button id='btn1'>发送</button>
+
+    <!-- 注意， 只需要引用 JS，无需引用任何 CSS ！！！-->
+    <script type="text/javascript" src="https://unpkg.com/wangeditor@3.1.1/release/wangEditor.min.js">
+    </script>
+    <script type="text/javascript">
+        var oBtn = document.getElementById('btn1')
+        var Edit = window.wangEditor
+        var editor = new Edit('#editor')
+        editor.customConfig.uploadImgServer = '/upload'
+        editor.create()
+
+        oBtn.addEventListener('click', function () {
+            // 读取 html
+            console.log(editor.txt.getJSON())
+        }, false)
+    </script>
+</body>
+
+</html>
