@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            min-height: 0;
+            display: flex;
+            position: relative;
+        }
+
+        #left {
+            width: 300px;
+            background: black;
+            opacity: 0.9;
+        }
+
+        #line {
+            width: 2px;
+            background: black;
+            opacity: 0.9;
+            cursor: col-resize;
+        }
+
+        #right {
+            flex: 1;
+            background: black;
+            opacity: 0.8;
+        }
+
+        #message {
+            width: 0;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+        }
+
+        #message_center {
+            min-height: 0;
+            opacity: 0;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .topToBottom {
+            animation: topToBottom 500ms forwards;
+        }
+
+        .bottomToTop {
+            animation: bottomToTop 500ms forwards;
+        }
+
+        @keyframes topToBottom {
+            0% {
+                opacity: 0;
+                transform: translate(0, 0);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translate(0, 30px);
+            }
+        }
+
+        @keyframes bottomToTop {
+            0% {
+                opacity: 1;
+                transform: translate(0, 30px);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(0, 0);
+            }
+        }
+
+        #message_p {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            color: #fff;
+            margin-right: 8px;
+            text-align: center;
+            line-height: 16px;
+            font-size: 12px;
+        }
+
+        .success {
+            background: #52c41a;
+            line-height: 17px !important;
+            transform: rotateX(0deg) rotateY(179deg) rotateZ(125deg)
+        }
+
+        .error {
+            background: #f5222d;
+        }
+
+        .warning {
+            background: #faad14;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="left"></div>
+    <div id="line"></div>
+    <div id="right"></div>
+    <div id="message">
+        <div id="message_center">
+            <p id='message_p'></p>
+            <p id="message_text"></p>
+        </div>
+    </div>
+</body>
+<script>
+    var oLeft = document.getElementById('left')
+    var oLine = document.getElementById('line')
+    var oMessage = document.getElementById('message')
+    var oMessage_center = document.getElementById('message_center')
+    var oMessage_text = document.getElementById('message_text')
+    var oMessage_p = document.getElementById('message_p')
+    var times = null
+    var times_1 = null
+    oLine.onmousedown = (e) => {
+
+        document.onmousemove = (ev) => {
+            var ev = ev || window.event
+            var mx = ev.clientX
+            if (mx < 200) {
+                mx = 200
+                message(2000, '不可小于200px!', 'success')
+            } else if (mx > 500) {
+                message(2000, '大于500了😯!', 'warning')
+            }
+            oLeft.style.width = `${mx}px`
+        }
+
+        document.onmouseup = function (ev) {
+            document.onmousemove = null;
+        }
+    }
+
+    function message(time = 2000, text = '操作成功', type) {
+        oMessage.style.width = '100%'
+        oMessage_center.classList.remove('bottomToTop')
+        oMessage_center.classList.add('topToBottom')
+        oMessage_text.innerText = text
+        if (type === 'error') {
+            oMessage_p.classList.remove('success', 'warning')
+            oMessage_p.classList.add('error')
+            oMessage_p.innerText = 'x'
+        } else if (type === 'warning') {
+            oMessage_p.classList.remove('success', 'error')
+            oMessage_p.classList.add('warning')
+            oMessage_p.innerText = '!'
+        } else {
+            oMessage_p.classList.remove('error', 'warning')
+            oMessage_p.classList.add('success')
+            oMessage_p.innerText = '7'
+        }
+        times = setTimeout(() => { // 定时添加移出效果
+            oMessage_center.classList.remove('topToBottom')
+            oMessage_center.classList.add('bottomToTop')
+            times_1 = setTimeout(() => { // 移出结束后设置message元素宽度为0
+                oMessage.style.width = '0'
+                clearTimeout(times_1)
+            }, time)
+            clearTimeout(times)
+        }, time)
+    }
+</script>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #oUl {
+            display: flex;
+            list-style: none;
+        }
+
+        .oLi {
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .oLi:hover .oLi_div {
+            width: 100%;
+        }
+
+        .oLi_div {
+            height: 2px;
+            width: 0;
+            background: #1890ff;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 30px;
+            transition: width 0.2s linear;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="oUl">
+        <li class="oLi">
+            实有人口
+            <div class="oLi_div"></div>
+        </li>
+        <li class="oLi">
+            实有单位
+            <div class="oLi_div"></div>
+        </li>
+        <li class="oLi">
+            实有地址
+            <div class="oLi_div"></div>
+        </li>
+    </ul>
+</body>
+
+</html>
