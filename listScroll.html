@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            font-size: 12px;
+        }
+
+        #list {
+            width: 350px;
+            height: 90%;
+            border: 1px solid #d2dff4;
+            box-shadow: 0 10px 20px 0 rgba(0, 91, 255, 0.1);
+            position: absolute;
+            right: -360px;
+            top: 50px;
+            transition: all 0.5s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #title {
+            height: 50px;
+            border-bottom: 1px solid #d2dff4;
+            padding: 5px 15px;
+            line-height: 50px;
+        }
+
+        #title span {
+            float: left;
+        }
+
+        #close {
+            float: right !important;
+            cursor: pointer;
+        }
+
+        .count {
+            height: 120px;
+            border-bottom: 1px solid #d2dff4;
+        }
+
+        #list_review_box {
+            /* height: 57%; */
+            padding: 20px;
+            padding-right: 10px;
+            overflow: hidden;
+        }
+
+        #review_box {
+            height: 100%;
+            /* 必须 */
+            overflow: hidden;
+            /* 必须 */
+            text-align: center;
+            padding-right: 12px;
+        }
+
+        #review_box li {
+            padding: 10px;
+            border: 1px solid #d2dff4;
+            margin-bottom: 5px;
+            overflow: hidden;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .label {
+            padding: 5px 10px;
+            color: #fff;
+            background: red;
+            float: left;
+            margin-right: 20px;
+            margin-top: 15px;
+        }
+
+        .message {
+            float: left;
+        }
+
+        .message p {
+            text-align: left;
+        }
+
+        .foot {
+            height: 40px;
+            border-top: 1px solid #d2dff4;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="isShow()">采集列表</button>
+    <div id="list">
+        <div id="title">
+            <span>采集列表</span>
+            <span id="close" onclick="closes()">》</span>
+        </div>
+        <div class="count"></div>
+        <div id="list_review_box">
+            <div id="review_box">
+                <ul id="comment1">
+                    <li>
+                        <p class="label">电动车</p>
+                        <div class="message">
+                            <p>车牌号码：<span>南宁75EP3</span></p>
+                            <p>采集时间：<span>2020-09-24 11:35:23</span></p>
+                            <p>采集人：<span>南宁地头蛇【交警大队】</span></p>
+                        </div>
+                    </li>
+                    <li>第二条</li>
+                    <li>第三条</li>
+                    <li>第四条</li>
+                    <li>第五条</li>
+                    <li>第六条</li>
+                    <li>第七条</li>
+                    <li>第八条</li>
+                    <li>第九条</li>
+                    <li>第十条</li>
+                    <li>第十一条</li>
+                    <li>第十二条</li>
+                </ul>
+                <ul id="comment2"></ul>
+            </div>
+        </div>
+        <div class="foot"></div>
+    </div>
+</body>
+<script>
+    var oList = document.getElementById('list')
+    var show = true
+    var timer
+    function isShow() {
+        if (show) {
+            roll(50)
+            oList.style.right = '0'
+            show = false
+        } else {
+            clearInterval(timer)
+            oList.style.right = '-360px'
+            show = true
+        }
+    }
+
+    function closes() {
+        clearInterval(timer)
+        oList.style.right = '-360px'
+        show = true
+    }
+
+    // window.onload = roll(50);
+
+    function roll(t) {
+        var ul1 = document.getElementById("comment1")
+        var ul2 = document.getElementById("comment2")
+        var ulbox = document.getElementById("review_box")
+        ul2.innerHTML = ul1.innerHTML
+        ulbox.scrollTop = 0 // 开始无滚动时设为0
+        timer = setInterval(rollStart, t) // 设置定时器，参数t用在这为间隔时间（单位毫秒），参数t越小，滚动速度越快
+        // 鼠标移入div时暂停滚动
+        ulbox.onmouseover = function () {
+            clearInterval(timer)
+            ulbox.style.overflow = 'auto'
+        }
+        // 鼠标移出div后继续滚动
+        ulbox.onmouseout = function () {
+            timer = setInterval(rollStart, t)
+            ulbox.style.overflow = 'hidden'
+        }
+    }
+
+    // 开始滚动函数
+    function rollStart() {
+        // 上面声明的DOM对象为局部对象需要再次声明
+        var ul1 = document.getElementById("comment1")
+        var ul2 = document.getElementById("comment2")
+        var ulbox = document.getElementById("review_box")
+        // 正常滚动不断给scrollTop的值+1,当滚动高度大于列表内容高度时恢复为0
+        if (ulbox.scrollTop >= ul1.scrollHeight) {
+            ulbox.scrollTop = 0
+        } else {
+            ulbox.scrollTop++
+        }
+    }
+</script>
+
+</html>

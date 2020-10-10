@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
+        #box {
+            border: 1px solid #d2dff4;
+            box-shadow: 0 10px 20px 0 rgba(0, 91, 255, 0.1);
+            width: 60%;
+            height: 80%;
+            position: relative;
+            margin: 0 auto;
+            overflow: auto;
+        }
+
+        #box>div {
+            width: 400px;
+            height: 900px;
+            border: 1px solid #d2dff4;
+            box-shadow: 0 10px 20px 0 rgba(0, 91, 255, 0.1);
+            margin: 0 auto;
+            position: relative;
+        }
+
+        #box>div>span {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        button {
+            position: absolute;
+            right: 10px;
+            top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='box'>
+        <div><span>aaaaaaaa-Point</span></div>
+        <button onclick="point()">打印</button>
+    </div>
+</body>
+<script>
+    var oBox = document.getElementById('box')
+    var oButton = document.getElementsByTagName('button')[0]
+    window.onbeforeprint = beforePoint
+    window.onafterprint = afterPoint
+    function beforePoint() { // 打印前回调
+        console.log('aaaa')
+    }
+    function afterPoint() { // 打印后回调
+        oBox.style.width = '60%'
+        oBox.style.height = '80%'
+        oButton.style.display = 'block'
+    }
+    function point() { // 打印
+        oBox.style.width = '100%'
+        oBox.style.height = '100%'
+        oButton.style.display = 'none'
+        window.print()
+    }
+</script>
+
+</html>
