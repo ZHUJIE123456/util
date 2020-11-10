@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="getItem()">获取</button>
+</body>
+<script>
+    var obj = {
+        test: '123456',
+        date: new Date().getTime(),
+    }
+    localStorage.setItem('data', JSON.stringify(obj))
+
+    function getItem() {
+        var data = JSON.parse(localStorage.getItem('data'))
+        var newDate = new Date().getTime()
+        var times = newDate - data.date
+        if (times >= 24 * 60 * 60 * 1000 * 30) {
+            localStorage.removeItem('data')
+        } else {
+            console.log('bbbb')
+        }
+    }
+</script>
+
+</html>

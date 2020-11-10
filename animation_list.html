@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    #box {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .num {
+        margin: 10px 0;
+    }
+
+    .num i {
+        width: 15px;
+        height: 23px;
+        display: inline-block;
+        background: url(./number.png) no-repeat;
+        background-position: 0 0;
+        text-indent: -999em;
+    }
+</style>
+<script src="./jquery-2.2.0.min.js"></script>
+<script src="./animation.js"></script>
+
+<body>
+    <div id='box'>
+
+    </div>
+</body>
+<script>
+    $(function () {
+        init()
+    })
+
+    function init() {
+        var list = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
+        var html = ''
+        for (var i = 0; i < list.length; i++) {
+            html += "<span class='num'>4</span>"
+        }
+        $('#box').append(html)
+        console.log($('.num').length)
+        for (var i = 0; i < $('.num').length; i++) {
+            $('.num').eq(i).rollNumDaq({
+                deVal: 34
+            })
+        }
+    }
+
+    function animation(num) {
+        var len = String(num)
+        let text = len.split('').map((item, i) => {
+            var e = $('<i></i>')
+            var nums = String(num).charAt(i);
+            var y = -parseInt(nums) * 30; //y轴位置
+            var obj = $(e).eq(i);
+            obj.animate({ //滚动动画
+                backgroundPosition: '(0 ' + String(y) + 'px)'
+            }, 'slow', 'swing', function () { }
+            );
+        })
+        // for (var i = 0; i < length; i++) {
+        //     var e = $('<i></i>')
+
+        //     var num = String(num).charAt(i);
+        //     var y = -parseInt(num) * 30; //y轴位置
+        //     var obj = $(e).eq(i);
+        //     obj.animate({ //滚动动画
+        //         backgroundPosition: '(0 ' + String(y) + 'px)'
+        //     }, 'slow', 'swing', function () { }
+        //     );
+        // }
+    }
+</script>
+
+</html>
