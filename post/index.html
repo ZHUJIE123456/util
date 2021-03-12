@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery-2.2.0.min.js"></script>
+    <style>
+        #btn {
+            margin-top: 10px;
+        }
+
+        input {
+            width: 300px;
+            height: 27px;
+            margin-bottom: 10px;
+        }
+
+        .url {
+            display: flex;
+        }
+
+        textarea {
+            width: 500px;
+            height: 300px;
+        }
+
+        #bottom {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="top">
+        <div class="url"><span>请求路径:</span><input type="text" id="post_url"
+                value="http://192.168.20.70:16061/ydjw_service/"
+                placeholder="不传默认http://192.168.20.70:16061/ydjw_service/"></div>
+        <div class="url"><span>请求方式:</span><input type="text" id="post_type" placeholder="不传默认post" value="POST"></div>
+        <div class="url"><span>请 求 头:</span><input type="text" id="post_head" value="application/json"></div>
+        <div class="url"><span>请求参数:</span><textarea type="text" id="post_data" placeholder="json字符串">
+            { "appid": "7BA8ECD31DABE78F73D9A38DD3BB990F", "interface": "decode", "interface_type": "public",
+            "username": "208850", "module": "统一网关", "parameter": [ { "method": "GET", "ipAndPort": "http://29.44.131.111",
+            "parameter": { "headers": { "Content-Type": "application/json" }, "applicationJsonStr": "{}" }, "isMultipart":
+            false, "uri": "/boundary/decode/info" } ]}
+        </textarea></div>
+        <button id="btn">请求</button>
+    </div>
+    <div id="bottom">
+
+    </div>
+</body>
+<script>
+    (function () {
+        $('#btn').click(function () {
+            var urls = $('#post_url').val()
+            var types = $('#post_type').val()
+            var heads = $('#post_head').val()
+            var datas = $('#post_data').val() && JSON.parse($('#post_data').val())
+            $.ajax({
+                type: types,
+                url: urls,
+                dataType: 'json',
+                contentType: heads,
+                data: datas || {},
+                success: function (data) {
+                    $("#bottom").append(JSON.stringify(data))
+                },
+                error: function (jqXHR) {
+                    $("#bottom").append(JSON.stringify(jqXHR))
+                }
+            })
+        })
+    })()
+</script>
+
+</html>

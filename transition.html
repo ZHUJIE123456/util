@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #demo {
+            width: 100px;
+            height: 100px;
+            background: red;
+            transition: 0.5s 0.5s height, 0.5s width, 1s 1s background-color;
+        }
+
+        #demo:hover {
+            width: 500px;
+            height: 400px;
+            background: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo"></div>
+</body>
+
+</html>

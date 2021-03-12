@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body,
+        #box {
+            height: 100%;
+            width: 100%;
+        }
+
+        #canvas {
+            margin-top: 20px;
+        }
+    </style>
+    <script type="text/javascript" src="../jquery-2.2.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvg/1.4/rgbcolor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stackblur-canvas/1.4.1/stackblur.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvg/dist/browser/canvg.min.js"></script>
+    <script type="text/javascript" src="http://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        <button id="button">截屏</button>
+        <canvas id="canvas"></canvas>
+        <div id="img"></div>
+    </div>
+</body>
+<script>
+    var oCanvas = document.getElementById('canvas')
+    var svg = '<svg><text x="50" y="50">Hello World!</text><path d="M 0 -0.5 L 0 30.5 M 0 29.5 L 0 70.5 M -0.5 70 L 200.5 70 M 200 70 L 200 40 " transform="translate(2,2)" pointer-events="visibleStroke" version="1.1" xmlns="http://www.w3.org/2000/svg" class="jtk-connector-outline" fill="#456" stroke="none" style="" stroke-width="3"></path><path d="M 0 -0.5 L 0 30.5 M 0 29.5 L 0 70.5 M -0.5 70 L 200.5 70 M 200 70 L 200 40 " transform="translate(2,2)" pointer-events="visibleStroke" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#456" stroke="#456" style="" stroke-width="1"></path><path pointer-events="all" version="1.1" xmlns="http://www.w3.org/2000/svg" d="M200,40 L206,52 L200,47.476 L194,52 L200,40" class="" stroke="#456" fill="#456" transform="translate(2,2)"></path></svg>'
+    canvg(oCanvas, svg)
+
+    $('#button').on("click", function (event) {
+        event.preventDefault()
+        html2canvas(document.getElementById('canvas')).then(function (canvas) {
+            var dataUrl = canvas.toDataURL()
+            var newImg = document.createElement("img")
+            newImg.src = dataUrl
+            $('#img').append(newImg)
+        })
+    })
+</script>
+
+</html>
