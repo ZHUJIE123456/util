@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./jquery.datetimepicker.css">
+  <link rel="stylesheet" href="./index.css">
+  <title>select</title>
+</head>
+<body>
+  <div id="search">
+    <p class="search_img">
+      <img src="./search.svg" alt="search" />
+    </p>
+    <div class="search_body">
+      <p class='search_close'><span onclick='closeSearch()'>✖</span></p>
+      <div class='search_item'>
+        <div class="keywordSearch_select" onclick='select_keyword()'>
+          <div class="select_selection">
+            <p class="select_input">
+              <input type="text" id="keyValue" placeholder="请输入关键词" />
+            </p>
+          </div>
+          <div class="select_list">
+          </div>
+          <span class="select_clear" onclick='clearAllKeyWord()'>
+            <svg t="1647592418096" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1921" width="20" height="20"><path d="M85.333333 512C85.333333 276.352 276.309333 85.333333 512 85.333333c235.648 0 426.666667 190.976 426.666667 426.666667 0 235.648-190.976 426.666667-426.666667 426.666667-235.648 0-426.666667-190.976-426.666667-426.666667z m426.666667-30.165333l-105.685333-105.706667a21.269333 21.269333 0 0 0-30.08 0.106667 21.205333 21.205333 0 0 0-0.106667 30.08L481.834667 512l-105.706667 105.685333a21.269333 21.269333 0 0 0 0.106667 30.08 21.205333 21.205333 0 0 0 30.08 0.106667L512 542.165333l105.685333 105.706667a21.269333 21.269333 0 0 0 30.08-0.106667 21.205333 21.205333 0 0 0 0.106667-30.08L542.165333 512l105.706667-105.685333a21.269333 21.269333 0 0 0-0.106667-30.08 21.205333 21.205333 0 0 0-30.08-0.106667L512 481.834667z" fill="#8c8c8c" p-id="1922"></path></svg>
+          </span>
+        </div>
+
+        <div class='dateSearch' onclick='setDate()'>
+          <div class="dateSearch_selection">
+            <span class="placeholder">请设置时间</span>
+          </div>
+          <span class="dateSearch_clear" onclick='clearAllDateSearch()'>
+            <svg t="1647592418096" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1921" width="20" height="20"><path d="M85.333333 512C85.333333 276.352 276.309333 85.333333 512 85.333333c235.648 0 426.666667 190.976 426.666667 426.666667 0 235.648-190.976 426.666667-426.666667 426.666667-235.648 0-426.666667-190.976-426.666667-426.666667z m426.666667-30.165333l-105.685333-105.706667a21.269333 21.269333 0 0 0-30.08 0.106667 21.205333 21.205333 0 0 0-0.106667 30.08L481.834667 512l-105.706667 105.685333a21.269333 21.269333 0 0 0 0.106667 30.08 21.205333 21.205333 0 0 0 30.08 0.106667L512 542.165333l105.685333 105.706667a21.269333 21.269333 0 0 0 30.08-0.106667 21.205333 21.205333 0 0 0 0.106667-30.08L542.165333 512l105.706667-105.685333a21.269333 21.269333 0 0 0-0.106667-30.08 21.205333 21.205333 0 0 0-30.08-0.106667L512 481.834667z" fill="#8c8c8c" p-id="1922"></path></svg>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script src="./jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="drag-arrange.min.js"></script>
+<script src="./jquery.datetimepicker.full.min.js"></script>
+
+<script src="./index.js"></script>
+</html>
