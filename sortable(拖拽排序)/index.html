@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    html, body{
+      height: 100%;
+      width: 100%;
+    }
+    body{
+      min-height: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url(./bg.gif) repeat #0a0a0a;
+    }
+    a{
+      text-decoration: none;
+      color: #ccc;
+    }
+    .tips{
+      width: 100%;
+      min-height: 0;
+      position: fixed;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      color: #ccc;
+    }
+    #box{
+      width: 600px;
+      height: 600px;
+      min-height: 0;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    #box > p{
+      width: 200px;
+      height: 200px;
+      text-align: center;
+      line-height: 200px;
+      color: #fff;
+      cursor: move;
+    }
+  </style>
+</head>
+<body>
+  <div class="tips">
+    <span>中文文档访问：<a href="https://www.itxst.com/sortablejs/neuinffi.html" target="_blank">https://www.itxst.com/sortablejs/neuinffi.html</a></span>
+    <span>官方网站访问：<a href="https://github.com/SortableJS/Sortable" target="_blank">https://github.com/SortableJS/Sortable</a></span>
+  </div>
+  <div id="box">
+    <p data-id="1">1</p>
+    <p data-id="2">2</p>
+    <p data-id="3">3</p>
+    <p data-id="4">4</p>
+    <p data-id="5">5</p>
+    <p data-id="6">6</p>
+    <p data-id="7">7</p>
+    <p data-id="8">8</p>
+    <p data-id="9">9</p>
+  </div>
+</body>
+<script src="./sortable.min.js"></script>
+<script>
+  (function(){
+
+    var oP = document.querySelectorAll('p')
+    for(var i = 0; i < oP.length; i++){
+      oP[i].style.background = setRgbColor()
+    }
+
+    // 场景拖拽排序功能
+    var el = document.getElementById('box')
+    var ops = {
+      animation: 500,
+      //拖动结束
+      onEnd: function (evt) {
+        console.log(sortable.toArray()) // 排序过后的数组
+      },
+    }
+    //初始化
+    var sortable = Sortable.create(el, ops)
+
+    // 生成随机色
+    function setRgbColor() {
+      var r = parseInt(Math.random() * 256)
+      var g = parseInt(Math.random() * 256)
+      var b = parseInt(Math.random() * 256)
+      return `rgb(${r}, ${g}, ${b})`
+    }
+
+  })()
+</script>
+</html>
