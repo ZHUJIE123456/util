@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>切割抖动轮播图</title>
+  <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+  <div class="facade">
+    <ul class="column1">
+      <li><img src="./image/image1.jpg" alt="First Image" /></li>
+      <li><img src="./image/image2.jpg" alt="First Image" /></li>
+      <li><img src="./image/image3.jpg" alt="First Image" /></li>
+      <li><img src="./image/image4.jpg" alt="First Image" /></li>
+      <li><img src="./image/image5.jpg" alt="First Image" /></li>
+    </ul>
+    <ul class="column2">
+      <li><img src="./image/image1.jpg" alt="First Image" /></li>
+      <li><img src="./image/image2.jpg" alt="First Image" /></li>
+      <li><img src="./image/image3.jpg" alt="First Image" /></li>
+      <li><img src="./image/image4.jpg" alt="First Image" /></li>
+      <li><img src="./image/image5.jpg" alt="First Image" /></li>
+    </ul>
+    <ul class="column3">
+      <li><img src="./image/image1.jpg" alt="First Image" /></li>
+      <li><img src="./image/image2.jpg" alt="First Image" /></li>
+      <li><img src="./image/image3.jpg" alt="First Image" /></li>
+      <li><img src="./image/image4.jpg" alt="First Image" /></li>
+      <li><img src="./image/image5.jpg" alt="First Image" /></li>
+    </ul>
+    <ul class="column4">
+      <li><img src="./image/image1.jpg" alt="First Image" /></li>
+      <li><img src="./image/image2.jpg" alt="First Image" /></li>
+      <li><img src="./image/image3.jpg" alt="First Image" /></li>
+      <li><img src="./image/image4.jpg" alt="First Image" /></li>
+      <li><img src="./image/image5.jpg" alt="First Image" /></li>
+    </ul>
+  </div>
+  <div class="interact">
+    <button id="advance">点击切换下一张</button>
+    <button id="autoPlay" auto="0">自动切换</button>
+    <input id="custom" placeholder="自定义切换时长" type="number" min="1" />
+  </div>
+</body>
+<script src="./jquery-2.2.0.min.js"></script>
+<script src="./jquery.roundabout2.js"></script>
+<script src="./jquery.roundabout-shapes2.js"></script>
+<script src="./jquery.easing.js"></script>
+<script src="./index.js"></script>
+</html>
